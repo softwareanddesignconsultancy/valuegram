@@ -8,7 +8,13 @@ import {CLIENT_VERSION, REACT_VERSION, SERVER_URL} from './config';
 import 'whatwg-fetch';
 import Footer from "./Footer";
 
-class App extends Component {
+
+import Autocomplete, {
+    createFilterOptions,
+  } from "@material-ui/lab/Autocomplete";
+import Asynchronous from './pages/Asynchronous';
+
+  class App extends Component {
 
     state = {
       serverInfo: {},
@@ -24,7 +30,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        fetch(SERVER_URL + '/application')
+        fetch(SERVER_URL + '/api/application')
             .then(r => r.json())
             .then(json => this.setState({serverInfo: json}))
             .catch(error => console.error('Error connecting to server: ' + error));
@@ -39,17 +45,18 @@ class App extends Component {
             <Row key={2}>
                 <div id="content">
                     <section className="row colset-2-its">
-                        {/* <h1 style={{textAlign: 'center'}}>Welcome to Grails</h1>
+                        <h1 style={{textAlign: 'center'}}>Welcome to Valuegram</h1>
                         <br/>
-                        <p>
-                            Congratulations, you have successfully started your Grails & React application! While in
-                            development mode, changes will be loaded automatically when you edit your React app,
-                            without even refreshing the page.
-                            Below is a list of controllers that are currently deployed in
-                            this application, click on each to execute its default action:
+                        {/* <p>
+                         Search for product and get best price from Both Online and Offline
                         </p> */}
-
+                        <br/>
                         <div id="controllers" role="navigation">
+                        <Asynchronous />
+                        </div>
+
+                        {/* <div id="controllers" role="navigation">
+                            
                             <h2>Available Controllers:</h2>
                             <ul>
                                 {serverInfo.controllers ? serverInfo.controllers.map(controller => {
@@ -58,7 +65,7 @@ class App extends Component {
                                     </li>;
                                 }) : null}
                             </ul>
-                        </div>
+                        </div> */}
                     </section>
 
                 </div>

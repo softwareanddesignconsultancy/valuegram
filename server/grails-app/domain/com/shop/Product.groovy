@@ -6,5 +6,7 @@ class Product {
 
 
     static constraints = {
+        name unique:true
+        description nullable:true,blank:true
     }
 }
