@@ -13,6 +13,7 @@ class Group implements Serializable {
 
 	String name
 
+
 	Set<Role> getAuthorities() {
 		(GroupRole.findAllByGroup(this) as List<GroupRole>)*.role as Set<Role>
 	}

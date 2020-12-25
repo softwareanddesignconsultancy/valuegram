@@ -1,10 +1,9 @@
 package com.shop
 
-import com.usermanagement.Company
 import grails.gorm.MultiTenant
 
 class Inventory implements  MultiTenant<Inventory> {
-    String companyid
+    String username
     Product product
     Integer quantity
     Double costPrice
@@ -13,6 +12,6 @@ class Inventory implements  MultiTenant<Inventory> {
     static constraints = {
     }
     static mapping = {
-        tenantId name:'companyid'
+        tenantId name:'username'
     }
 }

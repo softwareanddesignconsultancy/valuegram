@@ -33,7 +33,12 @@ spring:
 management:
     endpoints:
         enabled-by-default: false
-
+---
+grails:
+     gorm:
+        multiTenancy:
+           mode: DISCRIMINATOR
+           tenantResolverClass: com.usermanagement.CustomTenentResolver
 ---
 grails:
     mime:

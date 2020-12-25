@@ -3,7 +3,7 @@ package com.shop
 import grails.gorm.MultiTenant
 
 class Customer implements  MultiTenant<Customer> {
-    String companyid
+    String username
     String name
     String email
     String mobile
@@ -13,6 +13,6 @@ class Customer implements  MultiTenant<Customer> {
     }
 
     static mapping = {
-        tenantId name:'companyid'
+        tenantId name:'username'
     }
 }
