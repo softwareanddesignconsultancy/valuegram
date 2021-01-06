@@ -22,8 +22,13 @@ apply plugin:"com.github.node-gradle.node"
 apply plugin:"org.grails.plugins.views-json"
 
 repositories {
+    jcenter()
     maven { url "https://repo.grails.org/grails/core" }
+
 }
+
+
+
 
 configurations {
     developmentOnly
@@ -56,6 +61,8 @@ dependencies {
     compile "org.grails.plugins:views-json-templates"
     compile 'org.grails.plugins:spring-security-core:4.0.3'
     compile "org.grails.plugins:spring-security-rest:3.0.1"
+    
+    compile "com.github.slugify:slugify:2.4"
     
 
     compileOnly "io.micronaut:micronaut-inject-groovy"

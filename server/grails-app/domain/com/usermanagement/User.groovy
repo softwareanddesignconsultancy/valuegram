@@ -12,11 +12,15 @@ class User implements Serializable {
     private static final long serialVersionUID = 1
 
     String username
+    String email
+    String mobile
     String password
     boolean enabled = true
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
+
+    static hasMany = [followed:User]
 
     Set<Group> getAuthorities() {
         (UserGroup.findAllByUser(this) as List<UserGroup>)*.group as Set<Group>

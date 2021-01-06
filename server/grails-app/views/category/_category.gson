@@ -1,0 +1,7 @@
+import com.shop.Category
+
+model {
+	Category category
+}
+
+json g.render(category, [resolveTemplate: false])

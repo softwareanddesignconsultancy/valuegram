@@ -1,18 +1,8 @@
 import React, {Component} from 'react';
 import AppNav from './AppNav';
 import {Row} from 'reactstrap'
-
-import grailsLogo from './images/grails-cupsonly-logo-white.svg';
-import reactLogo from './images/logo.svg';
 import {CLIENT_VERSION, REACT_VERSION, SERVER_URL} from './config';
 import 'whatwg-fetch';
-import Footer from "./Footer";
-
-
-import Autocomplete, {
-    createFilterOptions,
-  } from "@material-ui/lab/Autocomplete";
-import Asynchronous from './pages/Asynchronous';
 
   class App extends Component {
 
@@ -41,21 +31,14 @@ import Asynchronous from './pages/Asynchronous';
         const {serverInfo, clientInfo, collapse} = this.state;
 
         return [
-            <AppNav serverInfo={serverInfo} clientInfo={clientInfo} collapse={collapse} toggle={this.toggle} key={0}/>,
+            <AppNav collapse={collapse} toggle={this.toggle} key={0}/>,
             <Row key={2}>
                 <div id="content">
                     <section className="row colset-2-its">
-                        <h1 style={{textAlign: 'center'}}>Welcome to Valuegram</h1>
-                        <br/>
-                        {/* <p>
-                         Search for product and get best price from Both Online and Offline
-                        </p> */}
-                        <br/>
-                        <div id="controllers" role="navigation">
-                        <Asynchronous />
-                        </div>
+                        <h1 style={{textAlign: 'center'}}>Local Zone Online Companies</h1>
+                       
 
-                        {/* <div id="controllers" role="navigation">
+                        <div id="controllers" role="navigation">
                             
                             <h2>Available Controllers:</h2>
                             <ul>
@@ -65,7 +48,7 @@ import Asynchronous from './pages/Asynchronous';
                                     </li>;
                                 }) : null}
                             </ul>
-                        </div> */}
+                        </div>
                     </section>
 
                 </div>

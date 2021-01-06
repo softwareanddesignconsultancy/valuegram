@@ -1,60 +1,76 @@
-import fetch from 'cross-fetch';
-import React from 'react';
+import React, { useState,useEffect } from "react";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { SERVER_URL} from './../config';
+import { useSelector, useDispatch } from "react-redux";
+import { searchProduct } from '../redux';
+
 function sleep(delay = 0) {
   return new Promise((resolve) => {
     setTimeout(resolve, delay);
   });
 }
 
-export default function Asynchronous() {
-  const [open, setOpen] = React.useState(false);
-  const [options, setOptions] = React.useState([]);
+export default function SearchProductNearBy(props) {
+  const dispatch = useDispatch();
+  
+  const product =  useSelector((state) => state.searchProuduct);
+
+  const [open, setOpen] = useState(false);
+  
+  const [options, setOptions] = useState([]);
+
   const loading = open && options.length === 0;
 
-  React.useEffect(() => {
+
+  useEffect(() => {
+    dispatch(searchProduct());
+  }, []);
+
+
+
+  useEffect(() => {
     let active = true;
 
     if (!loading) {
       return undefined;
     }
 
-    (async () => {
-      const response = await fetch(SERVER_URL + '/api/productSearch');
-      await sleep(1e3); 
-      const product = await response.json();
+    sleep(1e3);
 
-      if (active) {
-        setOptions(product);
-      }
-    })();
-
+    if (active) {
+          setOptions(product.searchProduct);
+        }
+ 
     return () => {
       active = false;
     };
+
   }, [loading]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!open) {
       setOptions([]);
     }
   }, [open]);
 
-  return (
+  return (<div>
     <Autocomplete
       id="asynchronous-demo"
-      style={{ width: 300 }}
+      
       open={open}
+      onChange={(event, value) => 
+        props.setProduct(value)
+      }
       onOpen={() => {
         setOpen(true);
       }}
       onClose={() => {
         setOpen(false);
       }}
-      getOptionSelected={(option, value) => option.name === value.name}
+      getOptionSelected={(option, value) => 
+        option.name === value.name
+      }
       getOptionLabel={(option) => option.name}
       options={options}
       loading={loading}
@@ -67,7 +83,7 @@ export default function Asynchronous() {
             ...params.InputProps,
             endAdornment: (
               <React.Fragment>
-                {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                {loading ? <CircularProgress color="secondary" size={20} /> : null}
                 {params.InputProps.endAdornment}
               </React.Fragment>
             ),
@@ -75,5 +91,8 @@ export default function Asynchronous() {
         />
       )}
     />
+
+    
+    </div>
   );
 }
